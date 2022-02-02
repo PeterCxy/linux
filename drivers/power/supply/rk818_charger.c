@@ -374,6 +374,8 @@ static int rk818_charger_get_property(struct power_supply *psy,
 			val->intval = POWER_SUPPLY_STATUS_CHARGING;
 			break;
 		case RK818_CHG_STS_TERMINATED:
+			val->intval = POWER_SUPPLY_STATUS_FULL;
+			break;
 		default:
 			val->intval = POWER_SUPPLY_STATUS_NOT_CHARGING;
 			break;
