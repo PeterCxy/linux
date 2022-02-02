@@ -352,13 +352,14 @@ static int rk818_charger_get_property(struct power_supply *psy,
 
 	switch (psp) {
 	case POWER_SUPPLY_PROP_ONLINE:
-		ret = regmap_read(cg->regmap, RK818_CHRG_CTRL_REG1, &reg);
+		ret = regmap_read(cg->regmap, RK818_SUP_STS_REG, &reg);
 		if (ret) {
 			dev_err(cg->dev, "failed to read the charger state (%d)\n", ret);
 			return ret;
 		}
 
-		val->intval = !!(reg & RK818_CHRG_CTRL_REG1_CHRG_EN);
+		/* all states other than none mean charger is online, even the error ones */
+		val->intval = ((reg & RK818_CHG_STS_MASK) != RK818_CHG_STS_NONE);
 		break;
 
 	case POWER_SUPPLY_PROP_STATUS:
