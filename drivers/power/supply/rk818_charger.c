@@ -470,15 +470,6 @@ static int rk818_charger_set_property(struct power_supply *psy,
 	int ret;
 
 	switch (psp) {
-	case POWER_SUPPLY_PROP_ONLINE:
-		ret = regmap_update_bits(cg->regmap, RK818_CHRG_CTRL_REG1,
-					 RK818_CHRG_CTRL_REG1_CHRG_EN,
-					 val->intval ? RK818_CHRG_CTRL_REG1_CHRG_EN : 0);
-		if (ret)
-			dev_err(cg->dev, "failed to setup the charger (%d)\n", ret);
-
-		return ret;
-
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
                 return rk818_charger_set_voltage_max(cg, val->intval);
 
@@ -496,7 +487,6 @@ static int rk818_charger_prop_writeable(struct power_supply *psy,
 	switch (psp) {
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_CURRENT:
 	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
-	case POWER_SUPPLY_PROP_ONLINE:
 		return 1;
 
 	default:
