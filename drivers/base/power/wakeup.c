@@ -178,6 +178,9 @@ void wakeup_source_add(struct wakeup_source *ws)
 	if (WARN_ON(!ws))
 		return;
 
+	if (!strcmp(ws->name, "NETLINK"))
+		return;
+
 	spin_lock_init(&ws->lock);
 	timer_setup(&ws->timer, pm_wakeup_timer_fn, 0);
 	ws->active = false;
