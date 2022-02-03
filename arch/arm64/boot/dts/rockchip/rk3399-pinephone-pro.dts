@@ -139,7 +139,7 @@
 
 		led-pwr {
 			color = <LED_COLOR_ID_GREEN>;
-			default-state = "on";
+			default-state = "off";
 			function = LED_FUNCTION_POWER;
 			gpios = <&gpio4 RK_PD5 GPIO_ACTIVE_HIGH>;
 			label = "green:disk-activity";
