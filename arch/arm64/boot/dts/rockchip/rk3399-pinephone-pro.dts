@@ -1268,6 +1268,7 @@
 	cap-sdio-irq;
 	disable-wp;
 	keep-power-in-suspend;
+	wakeup-source;
 	mmc-pwrseq = <&sdio_pwrseq>;
 	non-removable;
 	pinctrl-names = "default";
